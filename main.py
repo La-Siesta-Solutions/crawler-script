@@ -19,7 +19,6 @@ def crawl():
     print("Crawling " + url + "...")
     return crawler_interactor.get_info(url, white_list_curated)
 
-
 def download_images(crawl_content):
     download_images_controller = DownloadImagesController()
     download_images_interactor = DownloadImagesInteractor(download_images_controller)
