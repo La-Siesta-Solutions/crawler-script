@@ -1,10 +1,12 @@
-from data.CrawlerRepository import CrawlerRepository
+from crawlingScreen.view.CrawlingViewImp import CrawlingViewImp
+from crawlingScreen.data.CrawlerRepository import CrawlerRepository
 from data.controllers.DownloadImagesController import DownloadImagesController
-from data.controllers.SpiderController import SpiderController
-from domain.CrawlerInteractor import CrawlerInteractor
+from crawlingScreen.data.SpiderController import SpiderController
+from crawlingScreen.domain.CrawlerInteractor import CrawlerInteractor
 from domain.DownloadImagesInteractor import DownloadImagesInteractor
 from domain.StoreInteractor import StoreInteractor
 from domain.model.StorageType import StorageType
+from welcomeScreen.view import WelcomeView
 
 
 def crawl():
@@ -39,29 +41,45 @@ def store(crawl_content, images_path):
 
     return store_interactor.store(images_path)
 
+
+
+def __show_welcome():
+    WelcomeView.show_title()
+    WelcomeView.show_introduction()
+    WelcomeView.ask_enter_to_start()
+
+def __crawl():
+    crawler_interactor = CrawlerInteractor(CrawlingViewImp())
+    crawler_interactor.crawl()
+
 if __name__ == "__main__":
-    print("")
-    print("-------------------")
-    print(" LA SIESTA CRAWLER")
-    print("-------------------")
-    print("")
-    crawl_results = crawl()
-    print("")
-    print("----------------------------------------------------------")
-    print("Crawl completed! Total cost: " + str(crawl_results.price))
-    print("----------------------------------------------------------")
-    print("")
-    images_path = download_images(crawl_results.all_content)
-    if images_path is not None:
-        print("")
-        print("----------------------------------------------------------")
-        print("Images downloaded at\n" + str(images_path))
-        print("----------------------------------------------------------")
-        print("")
-    store_results = store(crawl_results.all_content, images_path)
-    print("")
-    print("----------------------------------------------------------")
-    print(f"Storage completed! {store_results.size:.2f} KB processed into \n{store_results.path}")
-    print("----------------------------------------------------------")
-    print("")
+    __show_welcome()
+    __crawl()
+
+
+
+    #print("")
+    #print("-------------------")
+    #print(" LA SIESTA CRAWLER")
+    #print("-------------------")
+    #print("")
+    #crawl_results = crawl()
+    #print("")
+    #print("----------------------------------------------------------")
+    #print("Crawl completed! Total cost: " + str(crawl_results.price))
+    #print("----------------------------------------------------------")
+    #print("")
+    #images_path = download_images(crawl_results.all_content)
+    #if images_path is not None:
+    #    print("")
+    #    print("----------------------------------------------------------")
+    #    print("Images downloaded at\n" + str(images_path))
+    #    print("----------------------------------------------------------")
+    #    print("")
+    #store_results = store(crawl_results.all_content, images_path)
+    #print("")
+    #print("----------------------------------------------------------")
+    #print(f"Storage completed! {store_results.size:.2f} KB processed into \n{store_results.path}")
+    #print("----------------------------------------------------------")
+    #print("")
     #clean_images()

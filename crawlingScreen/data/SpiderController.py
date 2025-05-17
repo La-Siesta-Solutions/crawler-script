@@ -1,7 +1,6 @@
 from spider import Spider
-from data.controllers.contracts.CrawlerController import CrawlerController
 
-class SpiderController(CrawlerController):
+class SpiderController():
 
     def __init__(self, api_key):
         self.app = Spider(api_key=api_key)
