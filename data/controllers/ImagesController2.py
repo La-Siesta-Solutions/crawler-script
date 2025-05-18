@@ -1,7 +1,7 @@
 import re
 import requests
 
-class ImagesController:
+class ImagesController2:
 
     def download_images(self, image_url):
         try:

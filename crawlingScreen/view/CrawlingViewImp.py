@@ -33,5 +33,4 @@ class CrawlingViewImp(CrawlingView):
         CoreUI.print_text(10, 5, "\033[1m\033[32mWorking...!\033[0m")
 
     def show_costs(self, total_cost):
-        CoreUI.print_text(10, 5, f"Operation completed! Total cost: \033[1m${total_cost}\033[0m")
-        return CoreUI.print_input(11, 5, " ")
+        return CoreUI.print_input(10, 5, f"Operation completed! Total cost: \033[1m${total_cost}\033[0m. Click enter to \033[1m\033[32mcontinue\033[0m")

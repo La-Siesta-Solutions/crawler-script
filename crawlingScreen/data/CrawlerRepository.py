@@ -1,5 +1,5 @@
 from crawlingScreen.data.SpiderController import SpiderController
-from crawlingScreen.domain.model.CrawlResult import CrawlResult
+from core.domain.model.CrawlResult import CrawlResult
 
 class CrawlerRepository:
 
