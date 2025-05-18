@@ -1,11 +1,13 @@
 from crawlingScreen.view.CrawlingViewImp import CrawlingViewImp
 from crawlingScreen.data.CrawlerRepository import CrawlerRepository
-from data.controllers.DownloadImagesController import DownloadImagesController
+from imagesScreen.data.AWSTextractController import AWSTextractController
+from imagesScreen.data.ImagesController import ImagesController
 from crawlingScreen.data.SpiderController import SpiderController
 from crawlingScreen.domain.CrawlerInteractor import CrawlerInteractor
-from domain.DownloadImagesInteractor import DownloadImagesInteractor
+from imagesScreen.domain.ManageImagesInteractor import ManageImagesInteractor
 from domain.StoreInteractor import StoreInteractor
 from domain.model.StorageType import StorageType
+from imagesScreen.view.ImagesScreenImp import ImagesScreenImp
 from welcomeScreen.view import WelcomeView
 
 
@@ -22,13 +24,13 @@ def crawl():
     return crawler_interactor.get_info(url, white_list_curated)
 
 def download_images(crawl_content):
-    download_images_controller = DownloadImagesController()
-    download_images_interactor = DownloadImagesInteractor(download_images_controller)
+    download_images_controller = ImagesController()
+    download_images_interactor = ManageImagesInteractor(download_images_controller)
     return download_images_interactor.download_images(crawl_content)
 
 def clean_images():
-    download_images_controller = DownloadImagesController()
-    download_images_interactor = DownloadImagesInteractor(download_images_controller)
+    download_images_controller = ImagesController()
+    download_images_interactor = ManageImagesInteractor(download_images_controller)
     return download_images_interactor.clean_images_storage()
 
 def store(crawl_content, images_path):
@@ -50,11 +52,16 @@ def __show_welcome():
 
 def __crawl():
     crawler_interactor = CrawlerInteractor(CrawlingViewImp())
-    crawler_interactor.crawl()
+    return crawler_interactor.crawl()
+
+def __manage_images():
+    manage_images_interactor = ManageImagesInteractor(ImagesScreenImp(), ImagesController(), AWSTextractController())
+    return manage_images_interactor.manage_images(results)
 
 if __name__ == "__main__":
     __show_welcome()
-    __crawl()
+    results = __crawl()
+    content_images_json = __manage_images()
 
 
 

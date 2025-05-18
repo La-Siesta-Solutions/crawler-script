@@ -1,7 +1,7 @@
 from crawlingScreen.data.CrawlerRepository import CrawlerRepository
 from crawlingScreen.data.SpiderController import SpiderController
 from crawlingScreen.domain.contract.CrawlingView import CrawlingView
-from crawlingScreen.domain.model.CrawlResult import CrawlResult
+from core.domain.model.CrawlResult import CrawlResult
 
 
 class CrawlerInteractor:
@@ -27,5 +27,6 @@ class CrawlerInteractor:
         self.__init_repository()
         results: CrawlResult = self.__get_info_from_url()
         self.crawling_view.show_costs(results.price)
+        return results
 
 
